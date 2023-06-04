@@ -1,5 +1,4 @@
 # Back_End_Engineering
-Solution
 
 # Repository Name
 Back_End_Engineering
@@ -12,6 +11,7 @@ To use the code in this repository, you need to have the following dependencies 
 - requests
 - pandas
 - json
+
 You can install these dependencies using pip:
 
 ```
