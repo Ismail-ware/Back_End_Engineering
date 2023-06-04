@@ -51,13 +51,6 @@ The `main_request` function defined in the script handles making HTTP requests t
 
 The function also implements retries in case of network errors. It allows a maximum number of retries (default: 3) and prints a retry message for each failed attempt. If all retries are exhausted and the request still fails, an exception is raised with the last received status code. If no response was received at all, an exception indicating that the max retries were exceeded is raised.
 
-## Requirements
-
-To run the script, you need to have the following installed:
-
-- Python 3.x
-- Requests library (`pip install requests`)
-
 ## Usage
 
 To execute the script, follow these steps:
