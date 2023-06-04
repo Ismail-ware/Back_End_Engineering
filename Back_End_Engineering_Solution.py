@@ -35,13 +35,8 @@ site_info = main_request("GET", f"site-info/{Site_ID}")
 indented_site_info = json.dumps(site_info, indent=2) ##indenting the output for better visualization
 print(indented_site_info)
 
-#Checks if the given object is a list of dictionaries
-def is_list_of_dicts(obj):
-    return isinstance(obj, list) and all(isinstance(item, dict) for item in obj)
-print(is_list_of_dicts(site_info))
-
 ## Task iii
-devices = site_info["devices"]
+devices = site_info["devices"]  ##subsetting devices from `site_info`
 print(devices)
 
 #filtering outages with a start time less than `2022` or whose `id` is not in devices
