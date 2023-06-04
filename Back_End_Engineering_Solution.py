@@ -1,7 +1,6 @@
 #import relevant libraries
 import requests
 import json
-import pandas.io.json as pd_json
 import pandas as pd
 
 # Set the base URL and API key
