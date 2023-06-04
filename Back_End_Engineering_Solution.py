@@ -3,7 +3,6 @@ import requests
 import json
 import pandas.io.json as pd_json
 import pandas as pd
-from datetime import datetime
 
 # Set the base URL and API key
 base_url = "https://api.krakenflex.systems/interview-tests-mock-api/v1/"
@@ -25,17 +24,17 @@ def main_request(method, endpoint, params=None, data=None):
     else:
         raise Exception(f"Request failed with status code {response.status_code}")
 
-## Task i
+## Task I
 outages = main_request("GET", "outages")
 indented_outages = json.dumps(outages, indent=2) #indenting the output for better visualization
 print(indented_outages)
 
-## Task ii
+## Task II
 site_info = main_request("GET", f"site-info/{Site_ID}")
 indented_site_info = json.dumps(site_info, indent=2) ##indenting the output for better visualization
 print(indented_site_info)
 
-## Task iii
+## Task III
 devices = site_info["devices"]  ##subsetting devices from `site_info`
 print(devices)
 
@@ -45,7 +44,7 @@ filtered_outages = [outage for outage in outages
 
 print(filtered_outages)
 
-## Task iv
+## Task IV
 #filtering outages after 2022 whose `id` are in devices
 outages_after_2022_in_devices = [outage for outage in outages
                     if (outage['begin'] >= '2022-01-01T00:00:00.000Z') and (outage['id'] in [device['id'] for device in devices])]
@@ -64,12 +63,9 @@ for outage in outages_after_2022_in_devices:
 
 print(remaining_outages)
 
-## Task v
-type(remaining_outages)
-
+## Task V
 #modifying data schema to conform to the payload requirement
 filtered_outages = []
-
 for outage in remaining_outages:
     filtered_outage = {
         "id": outage['id'],
