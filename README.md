@@ -64,9 +64,9 @@ To run the script, you need to have the following installed:
 
 To execute the script, follow these steps:
 
-1. Clone the repository or download the `Back_end_soln.py` file.
+1. Clone the repository or download the `500_status_code.py` file.
 2. Open a terminal or command prompt.
-3. Navigate to the directory where the `Back_end_soln.py` file is located.
+3. Navigate to the directory where the `500_status_code.py` file is located.
 4. Run the following command to execute the script:
 
    ```shell
