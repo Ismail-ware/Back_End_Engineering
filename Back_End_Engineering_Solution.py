@@ -1,13 +1,16 @@
+#import relevant libraries
 import requests
 import json
 import pandas.io.json as pd_json
 import pandas as pd
 from datetime import datetime
 
+# Set the base URL and API key
 base_url = "https://api.krakenflex.systems/interview-tests-mock-api/v1/"
 API_KEY = "EltgJ5G8m44IzwE6UN2Y4B4NjPW77Zk6FJK3lL23"
 Site_ID = "norwich-pear-tree"
 
+#create a helper function `main_request` for reusability
 def main_request(method, endpoint, params=None, data=None):
     headers = {"x-api-key": API_KEY}
     url = base_url + endpoint
@@ -24,35 +27,39 @@ def main_request(method, endpoint, params=None, data=None):
 
 ## Task i
 outages = main_request("GET", "outages")
-indented_outages = json.dumps(outages, indent=2) #indentation 
+indented_outages = json.dumps(outages, indent=2) #indenting the output for better visualization
 print(indented_outages)
 
 ## Task ii
 site_info = main_request("GET", f"site-info/{Site_ID}")
-indented_site_info = json.dumps(site_info, indent=2) #indentation 
+indented_site_info = json.dumps(site_info, indent=2) ##indenting the output for better visualization
 print(indented_site_info)
 
-#Test if it's a list of dict
+#Checks if the given object is a list of dictionaries
 def is_list_of_dicts(obj):
     return isinstance(obj, list) and all(isinstance(item, dict) for item in obj)
 print(is_list_of_dicts(site_info))
 
 ## Task iii
-devices = site_info["devices"] # List of dictionaries
+devices = site_info["devices"]
 print(devices)
+
+#filtering outages with a start time less than `2022` or whose `id` is not in devices
 filtered_outages = [outage for outage in outages
                     if (outage['begin'] < '2022-01-01T00:00:00.000Z') or (outage['id'] not in [device['id'] for device in devices])]
 
 print(filtered_outages)
 
 ## Task iv
-outages_after_2022_in_device = [outage for outage in outages
+#filtering outages after 2022 whose `id` are in devices
+outages_after_2022_in_devices = [outage for outage in outages
                     if (outage['begin'] >= '2022-01-01T00:00:00.000Z') and (outage['id'] in [device['id'] for device in devices])]
 
-print(outages_after_2022_in_device)
+print(outages_after_2022_in_devices)
 
+#appending `device_name` to `outages_after_2022_in_device`
 remaining_outages = []
-for outage in outages_after_2022_in_device:
+for outage in outages_after_2022_in_devices:
     outage_id = outage['id']
     for device in devices:
         if device['id'] == outage_id:
@@ -64,8 +71,8 @@ print(remaining_outages)
 
 ## Task v
 type(remaining_outages)
-#modifying data schema to confirm to the post schema given
 
+#modifying data schema to conform to the payload requirement
 filtered_outages = []
 
 for outage in remaining_outages:
