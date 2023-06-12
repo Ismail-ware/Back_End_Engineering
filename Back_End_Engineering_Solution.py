@@ -3,7 +3,7 @@ import json
 import logging
 
 base_url = "https://api.krakenflex.systems/interview-tests-mock-api/v1/"
-API_KEY = "12224"
+API_KEY = "undisclosed"
 Site_ID = "norwich-pear-tree"
 
 def main_request(method, endpoint, params=None, data=None):
